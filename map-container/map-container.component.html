@@ -1,0 +1,62 @@
+
+<div class="htmlContainer">
+<div class="container-fluid header">
+    <div class="row">
+        <div class="col-lg-6">
+            <h2>City Finder</h2>
+        </div>
+
+    </div>
+</div>
+<div class="container positionTop">
+
+    <div class="form-group">
+        <label for="exampleInputEmail1">Select State :</label>
+        <select class="form-control" [(ngModel)]="selectedState" (ngModelChange)="getCity($event)">
+            <option value="0">Select</option>
+            <option [value]="item" *ngFor="let item of stateList">{{item}}</option>
+        </select>   
+    </div>
+
+    <div class="row cardContainer">
+        <div class="col-lg-6 col-md-12  p-4">
+            <div class="cardList scrollable">
+            <ng-container *ngFor="let item of selectedCityList" >                
+               <div class="p-2">
+                <div class="card">
+                    <div class="card-body">
+                      {{item.City}}
+                    </div>
+                  </div>
+               </div>              
+            </ng-container>   
+        </div>
+            <div class="p-2" *ngIf="!selectedCityList.length">
+                <div class="card">
+                    <div class="card-body">
+                      Please select a state from dropdown!
+                    </div>
+                  </div>
+               </div>       
+        </div>
+        <div class="col-lg-6 col-md-12 p-4">
+            <agm-map [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom" [disableDefaultUI]="true" [zoomControl]="true" [(fitBounds)]='location.viewport'>
+                <ng-container *ngFor="let item of markerList">        
+                <agm-marker [(latitude)]="item.lat" [(longitude)]="item.lng"></agm-marker>
+            </ng-container>
+              </agm-map>
+        </div>
+     
+    </div>
+
+</div>
+
+
+
+
+</div>
+
+    
+    
+
+
